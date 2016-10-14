@@ -22,3 +22,7 @@
 
 # Ignore downloaded files
 /public/uploads*
+
+# Ignore application configuration
+# $ bundle exec figaro install to create secrets file
+/config/application.yml

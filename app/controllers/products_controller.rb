@@ -8,11 +8,10 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    binding.pry
     if @product.save
       redirect_to @product, notice: 'You succesfully created product.'
     else
-      render 'new', alert: @product.errors
+      redirect_to new_product_path, alert: @product.errors
     end
   end
 
@@ -36,6 +35,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+    FileUtils.rm_rf("public/uploads/product/image/#{params[:id]}")
     redirect_to products_path, alert: 'Product was succesfully deleted.'
   end
 

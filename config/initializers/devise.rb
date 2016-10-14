@@ -273,7 +273,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   Devise.setup do |config|
-    config.omniauth :facebook, '320645821645154', '1db6d855e020b0121844393d2ab03d26'
-    config.omniauth :github, '7c5f2cecc3899a5f7786', '29095f1e47af2f528a2a0c19d832fccae2ec41e7', scope: 'user:email'
+    config.omniauth :facebook, ENV['facebook_id'], ENV['facebook_key']
+    config.omniauth :github, ENV['github_id'], ENV['github_key'], scope: 'user:email'
   end
 end

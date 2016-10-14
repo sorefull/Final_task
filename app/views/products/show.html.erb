@@ -1,5 +1,6 @@
 <h2><%= @product.title %></h2>
-<%= image_tag @product.image.normal.url %>
+<%= image_tag @product.image.normal.url %><br>
+<%= link_to @product.category.title, @product.category %>
 <p>
   <%= @product.description %>
 </p>
