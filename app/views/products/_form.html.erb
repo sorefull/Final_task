@@ -28,6 +28,7 @@
 
   <%= f.label :category %><br>
   <%= f.select(:category_id) do %>
+    <option value="" disabled selected>Select category</option>
     <% Category.all.each do |c| -%>
       <%= content_tag(:option, c.title, value: c.id) %>
     <% end %>

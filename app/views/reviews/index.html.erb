@@ -1,0 +1,10 @@
+<h1>Unuproved Reviews</h1>
+<% @reviews.each do |review| %>
+  <%= review.user.email %>
+  <%= review.body %>
+  <%= review.stars %>
+  <%= link_to review.product.title, review.product %>
+  <%= link_to 'Approve', '#' %>
+  <%= link_to 'Delete', '#', style: 'color:red;' %>
+  <br>
+<% end %>

@@ -13,9 +13,18 @@
 #
 
 class Product < ApplicationRecord
-  belongs_to :category
+  # Validation
   validates :title, presence: true, length: { minimum: 4 }
   validates :description, presence: true, length: { minimum: 20 }
   validates :price, presence: true, numericality: { greater_than: 0 }
+
+  # Categories
+  belongs_to :category
+
+  # Image
   mount_uploader :image, ImageUploader
+
+  # Review
+  has_many :reviews, dependent: :destroy
+
 end

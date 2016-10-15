@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id         :integer          not null, primary key
+#  body       :text
+#  stars      :integer
+#  user_id    :integer
+#  product_id :integer
+#  approved   :boolean          default(FALSE), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  stars: 1
+  user_id: 1
+  product_id: 1
+  approved: false
+
+two:
+  body: MyText
+  stars: 1
+  user_id: 1
+  product_id: 1
+  approved: false
