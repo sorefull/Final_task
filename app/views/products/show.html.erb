@@ -9,18 +9,14 @@
 <%= link_to 'Delete product', @product, method: :delete, data: { confirm: "Are you sure?" }, style: 'color:red;' %>
 
 <div class="reviews">
-  <ul>
-  <% @product.reviews.each do |review| %>
-    <% if review.approved? %>
-      <li><%= review.body %>
-      <b><%= review.stars %></b></li>
-    <% end %>
+  <% @product.reviews.where(approved: true).each do |review| %>
+    <%= review.body %>
+    <b><%= review.stars %></b><br>
   <% end %>
-  </ul>
 </div>
 
 <% if current_user %>
-  <%= form_for [@product, @product.reviews.build] do |f| %>
+  <%= form_for [@product, @product.reviews.build], remote: true do |f| %>
     <%= f.text_area :body, placeholder: 'Review..' %><br>
     <%= f.label :stars %><br>
     <%= f.select(:stars) do %>

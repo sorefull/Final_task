@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :products do
-    resources :reviews, except: [:index, :show, :new, :edit]
+    resources :reviews, except: [:index, :show, :new]
     collection do
       get 'reviews', to: 'reviews#index'
     end

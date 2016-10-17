@@ -1,10 +1,6 @@
-<h1>Unuproved Reviews</h1>
-<% @reviews.each do |review| %>
-  <%= review.user.email %>
-  <%= review.body %>
-  <%= review.stars %>
-  <%= link_to review.product.title, review.product %>
-  <%= link_to 'Approve', '#' %>
-  <%= link_to 'Delete', '#', style: 'color:red;' %>
-  <br>
-<% end %>
+<h2>Reviews</h2>
+<%= link_to 'Unapproved', '', class: 'show_unapproved', remote: true, style: 'color:blue;' %>
+<%= link_to 'Approved', '', class: 'show_approved', remote: true, style: 'color:gray;' %>
+<div class="reviews">
+  <%= render partial: 'reviews', locals: { reviews: @reviews } %>
+</div>
