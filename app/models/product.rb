@@ -27,4 +27,6 @@ class Product < ApplicationRecord
   # Review
   has_many :reviews, dependent: :destroy
 
+  # Orders
+  has_and_belongs_to_many :orders
 end

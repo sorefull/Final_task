@@ -19,3 +19,6 @@ end
 30.times do
   Product.create(title: Faker::Commerce.product_name, description: Faker::Lorem.paragraph, price: Faker::Commerce.price, remote_image_url: Faker::Avatar.image, category_id: rand(1..10))
 end
+# 30.times do
+#   Product.create(title: Faker::Commerce.product_name, description: Faker::Lorem.paragraph, price: Faker::Commerce.price, category_id: rand(1..10))
+# end

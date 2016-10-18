@@ -1,0 +1,7 @@
+<% @order.products.each do |product| %>
+  <%= link_to product.title, product %>
+  <%= product.price %>
+  <%= link_to 'Remove', update_order_path(product_id: product, meth: :drop), method: :patch, style: 'color:red;' %><br>
+<% end %>
+Price: <%= @order.total_price %>$<br>
+<%= link_to 'Buy now', update_order_path(meth: :buy), method: :patch %><br>

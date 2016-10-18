@@ -21,6 +21,7 @@
 #
 
 class User < ApplicationRecord
+  after_create :create_order
   # Devise
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -43,4 +44,14 @@ class User < ApplicationRecord
 
   # Rewiews
   has_many :reviews, dependent: :destroy
+
+  # Order
+  has_many :orders, :dependent => :destroy
+  has_many :products, through: :orders
+  def create_order
+    orders.create
+  end
+  def order
+    orders.last
+  end
 end
