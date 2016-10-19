@@ -3,13 +3,14 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update]
 
   def index
-    @orders = Order.where(completed: true)
+    @orders = Order.where(status: [:completed, :sended, :canceled])
   end
 
   def edit
   end
 
   def update
+    order = Order.find(params[:order_id]) if params[:order_id]
     product = Product.find(params[:product_id]) if params[:product_id]
     case params[:meth]
     when 'add'
@@ -18,6 +19,12 @@ class OrdersController < ApplicationController
     when 'drop'
       @order.drop_from_order(product)
       message = 'You succesfully dropped product.'
+    when 'cancel'
+      order.canceled!
+      message = 'You succesfully canceled order.'
+    when 'send'
+      order.sended!
+      message = 'You succesfully sended order.'
     when 'buy'
       @order.update(order_params)
       if @order.buy_products!
@@ -26,13 +33,18 @@ class OrdersController < ApplicationController
         message = 'First add some products to your cart!'
       end
     end
-    redirect_to shopping_cart_path, notice: message
+    if params[:meth] == ('cancel' or 'send')
+      redirect_to orders_path, notice: message
+    else
+      redirect_to shopping_cart_path, notice: message
+    end
   end
 
 
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
+    @order.user.orders.create
     redirect_to orders_path, notice: 'You succesfully deleted an order.'
   end
 

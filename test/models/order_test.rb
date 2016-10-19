@@ -2,10 +2,13 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  status        :integer          default("noncompleted")
+#  user_id       :integer          not null
+#  contact_phone :string
+#  additional    :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 require 'test_helper'

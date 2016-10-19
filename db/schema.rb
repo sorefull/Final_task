@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20161018064813) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.boolean  "completed",     default: false
-    t.integer  "user_id",                       null: false
+    t.integer  "status",        default: 0
+    t.integer  "user_id",                   null: false
     t.string   "contact_phone"
     t.text     "additional"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "orders_products", id: false, force: :cascade do |t|

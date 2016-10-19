@@ -23,3 +23,4 @@
 <% @products.each do |product| %>
   <%= link_to product.title, product %><br>
 <% end %>
+<%= will_paginate @products, renderer: BootstrapPagination::Rails %>

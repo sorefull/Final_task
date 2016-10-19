@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @q = Product.search(params[:q])
-    @products = @q.result(distinct: true).includes(:category).to_a.uniq
+    @products = @q.result(distinct: true).includes(:category).uniq.paginate(:page => params[:page], :per_page => 10)
   end
 
   def create
