@@ -4,4 +4,15 @@
   <%= link_to 'Remove', update_order_path(product_id: product, meth: :drop), method: :patch, style: 'color:red;' %><br>
 <% end %>
 Price: <%= @order.total_price %>$<br>
-<%= link_to 'Buy now', update_order_path(meth: :buy), method: :patch %><br>
+<%= link_to 'Buy now', '', class: 'buy', remote: true %>
+<div class="form", style="display: none;">
+  <%= form_for(@order, url: update_order_path(meth: :buy), html: {method: "patch"}) do |f| %>
+    <%= f.label :contact_phone %><br>
+    <%= f.text_field :contact_phone, placeholder: 'Your contact Phone' %><br>
+
+    <%= f.label :additional %><br>
+    <%= f.text_area :additional, placeholder: 'Additional information.' %><br>
+
+    <%= f.submit :buy! %>
+  <% end %>
+</div>

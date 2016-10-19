@@ -26,6 +26,19 @@ class Product < ApplicationRecord
 
   # Review
   has_many :reviews, dependent: :destroy
+  def raiting
+    approved_reviews = reviews.where(approved: true)
+    reviews_length = approved_reviews.length
+    if reviews_length < 1
+      'No raiting yet.'
+    else
+      sum = 0
+      approved_reviews.each do |review|
+        sum += Review.stars[review.stars]
+      end
+      Review.stars.keys[sum/reviews_length]
+    end
+  end
 
   # Orders
   has_and_belongs_to_many :orders

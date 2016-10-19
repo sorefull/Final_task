@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
-
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @q = Product.search(params[:q])
+    @products = @q.result(distinct: true).includes(:category).to_a.uniq
   end
 
   def create

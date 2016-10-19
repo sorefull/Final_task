@@ -275,5 +275,6 @@ Devise.setup do |config|
   Devise.setup do |config|
     config.omniauth :facebook, ENV['facebook_id'], ENV['facebook_key']
     config.omniauth :github, ENV['github_id'], ENV['github_key'], scope: 'user:email'
+    config.omniauth :linkedin, ENV['linkedin_id'], ENV['linkedin_key']
   end
 end

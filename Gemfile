@@ -10,7 +10,9 @@ gem 'settingslogic'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
-# twitter, linked-in, vk
+gem 'omniauth-linkedin'
+# twitter, vk
+gem 'ransack'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

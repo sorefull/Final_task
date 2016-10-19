@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:update, :destroy, :edit]
+  before_action :set_review, only: [:update, :destroy]
+
   def index
     @reviews = Review.all
   end
@@ -13,15 +14,9 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    if @review.update(approve_params)
-      redirect_to reviews_products_path, notice: 'Review was successfuly updated!'
-    else
-      redirect_to edit_product_review_path(@review.product, @review), alert: @review.errors
-    end
+    @review.x_pprove!(params[:meth])
+    redirect_to reviews_products_path, notice: 'Review was successfuly updated!'
   end
 
   def destroy
@@ -32,10 +27,6 @@ class ReviewsController < ApplicationController
   private
   def review_params
     params.require(:review).permit(:body, :stars)
-  end
-
-  def approve_params
-    params.require(:review).permit(:approved)
   end
 
   def set_review

@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update]
+
   def index
     @orders = Order.where(completed: true)
   end
@@ -17,6 +18,7 @@ class OrdersController < ApplicationController
       @order.drop_from_order(product)
       message = 'You succesfully dropped product.'
     when 'buy'
+      @order.update(order_params)
       if @order.buy_products!
         message = 'We will contact you in nearest time, have a nice day!'
       else
@@ -36,5 +38,9 @@ class OrdersController < ApplicationController
   private
   def set_order
     @order = current_user.order
+  end
+
+  def order_params
+    params.require(:order).permit(:contact_phone, :additional)
   end
 end

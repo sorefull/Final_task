@@ -1,3 +1,25 @@
+<p>
+  <%= search_form_for @q do |f| %>
+    <%= f.label :title_or_description_cont %><br>
+    <%= f.search_field :title_or_description_cont %><br>
+
+    <%= f.label :category_id_eq %><br>
+    <%= f.select(:category_id_eq) do %>
+      <option value="" disabled selected>Select category</option>
+      <% Category.all.each do |c| -%>
+        <%= content_tag(:option, c.title, value: c.id) %>
+      <% end %>
+    <% end %><br>
+
+    <%= f.label :price_gteq %><br>
+    <%= f.search_field :price_gteq %><br>
+
+    <%= f.label :price_lteq %><br>
+    <%= f.search_field :price_lteq %><br>
+
+    <%= f.submit 'Search' %>
+  <% end %>
+</p>
 <% @products.each do |product| %>
   <%= link_to product.title, product %><br>
 <% end %>

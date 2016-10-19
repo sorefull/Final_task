@@ -21,6 +21,14 @@ class Review < ApplicationRecord
   belongs_to :user
 
   # Admin
+  def x_pprove!(meth)
+    case meth
+    when 'approve'
+      update(approved: true)
+    when 'unapprove'
+      update(approved: false)
+    end
+  end
 
   # Product
   belongs_to :product

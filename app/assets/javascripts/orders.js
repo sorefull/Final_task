@@ -2,9 +2,8 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
 $(document).on('turbolinks:load', function() {
-  $('.show_products_list').click(function(){
-    $('.list').show();
+  $('.buy').click(function(){
+    $('.form').show();
   });
 });
