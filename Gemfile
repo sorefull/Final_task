@@ -40,6 +40,7 @@ gem 'faker'
 gem 'carrierwave', '~> 0.9'
 gem 'mini_magick', '~> 4.3'
 gem 'figaro'
+gem 'cancancan', '~> 1.10'
 
 
 # Use Capistrano for deployment

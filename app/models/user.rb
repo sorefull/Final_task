@@ -31,6 +31,9 @@ class User < ApplicationRecord
 
   # Admin
   enum role: [:user, :admin] #[:moderator, :owner, etc]
+  def guest?
+    id.nil?
+  end
 
   # Social
   def self.from_omniauth(auth)
