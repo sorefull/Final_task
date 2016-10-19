@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:edit, :update]
 
   def index
-    @orders = Order.where(status: [:completed, :sended, :canceled])
+    @orders = Order.all
   end
 
   def edit
