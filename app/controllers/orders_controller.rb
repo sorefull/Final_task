@@ -1,29 +1,29 @@
 class OrdersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_order, only: [:edit, :update]
+  before_action :set_resources, only: [:edit, :update]
 
   def index
-    @orders = Order.all
+    @co_orders = Order.where(status: :completed)
+    @ca_orders = Order.where(status: :canceled)
+    @se_orders = Order.where(status: :sended)
   end
 
   def edit
   end
 
   def update
-    order = Order.find(params[:order_id]) if params[:order_id]
-    product = Product.find(params[:product_id]) if params[:product_id]
     case params[:meth]
     when 'add'
-      @order.add_to_order(product)
+      @order.add_to_order(@product)
       message = 'You succesfully added product to your cart.'
     when 'drop'
-      @order.drop_from_order(product)
+      @order.drop_from_order(@product)
       message = 'You succesfully dropped product.'
     when 'cancel'
-      order.canceled!
+      @order.canceled!
       message = 'You succesfully canceled order.'
     when 'send'
-      order.sended!
+      @order.sended!
       message = 'You succesfully sended order.'
     when 'buy'
       @order.update(order_params)
@@ -33,8 +33,10 @@ class OrdersController < ApplicationController
         message = 'First add some products to your cart!'
       end
     end
-    if params[:meth] == ('cancel' or 'send')
+    if params[:meth] == 'cancel' or params[:meth] == 'send'
       redirect_to orders_path, notice: message
+    elsif params[:meth] == 'add'
+      redirect_to @product, notice: message
     else
       redirect_to shopping_cart_path, notice: message
     end
@@ -49,8 +51,10 @@ class OrdersController < ApplicationController
   end
 
   private
-  def set_order
-    @order = current_user.order
+  def set_resources
+    @order = Order.find(params[:order_id]) if params[:order_id]
+    @product = params[:product_id] ? Product.find(params[:product_id]) : nil
+    @order ||= current_user.order
   end
 
   def order_params

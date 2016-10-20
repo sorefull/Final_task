@@ -1,9 +1,9 @@
-<%= link_to 'Completed', '', class: 'show_completed', remote: true, style: 'color:blue;' %>
-<%= link_to 'Sended', '', class: 'show_sended', remote: true, style: 'color:gray;' %>
-<%= link_to 'Canceled', '', class: 'show_canceled', remote: true, style: 'color:gray;' %>
+<%= link_to "Completed(#{@co_orders.count})", '', class: 'show_completed', remote: true, style: 'color:blue;' %>
+<%= link_to "Sended(#{@se_orders.count})", '', class: 'show_sended', remote: true, style: 'color:gray;' %>
+<%= link_to "Canceled(#{@ca_orders.count})", '', class: 'show_canceled', remote: true, style: 'color:gray;' %>
 
 <div class="completed">
-  <% orders.where(status: :completed).each do |order| %>
+  <% @co_orders.each do |order| %>
     <b>Email:</b> <%= order.user.email %><br>
     <b>Status:</b> <%= order.status %><br>
     <b>Products count:</b> <%= order.products.count %><br>
@@ -15,13 +15,13 @@
     <% if order.contact_phone %><b>Contact phone:</b> <%= order.contact_phone %><br><% end %>
     <% if order.additional %><b>Additional:</b> <%= order.additional %><br><% end %>
     <b>Total price:</b> <%= order.total_price %><br>
-    <%= link_to 'Delete', order, method: :delete, style: 'color:red;' %>|
+    <%= link_to 'Delete', order, method: :delete, style: 'color:red;' %> |
     <%= link_to 'Cancel', update_order_path(order_id: order.id, meth: :cancel), method: :patch, style: 'color:red;' %> |
     <%= link_to 'Send', update_order_path(order_id: order.id, meth: :send), method: :patch %><br>
   <% end %>
 </div>
 <div class="sended" style="display: none;">
-  <% orders.where(status: :sended).each do |order| %>
+  <% @se_orders.each do |order| %>
     <b>Email:</b> <%= order.user.email %><br>
     <b>Status:</b> <%= order.status %><br>
     <b>Products count:</b> <%= order.products.count %><br>
@@ -37,7 +37,7 @@
   <% end %>
 </div>
 <div class="canceled" style="display: none;">
-  <% orders.where(status: :canceled).each do |order| %>
+  <% @ca_orders.each do |order| %>
     <b>Email:</b> <%= order.user.email %><br>
     <b>Status:</b> <%= order.status %><br>
     <b>Products count:</b> <%= order.products.count %><br>

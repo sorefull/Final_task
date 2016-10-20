@@ -42,6 +42,7 @@ gem 'mini_magick', '~> 4.3'
 gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'will_paginate-bootstrap'
+gem 'whenever', :require => false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
