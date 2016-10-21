@@ -22,6 +22,9 @@ class OrdersController < ApplicationController
     when 'cancel'
       @order.canceled!
       message = 'You succesfully canceled order.'
+    when 'restore'
+      @order.completed!
+      message = 'You succesfully restored order.'
     when 'send'
       @order.sended!
       message = 'You succesfully sended order.'
@@ -33,9 +36,11 @@ class OrdersController < ApplicationController
         message = 'First add some products to your cart!'
       end
     end
-    if params[:meth] == 'cancel' or params[:meth] == 'send'
+    
+    case params[:meth]
+    when 'cancel', 'send', 'restore'
       redirect_to orders_path, notice: message
-    elsif params[:meth] == 'add'
+    when 'add'
       redirect_to @product, notice: message
     else
       redirect_to shopping_cart_path, notice: message

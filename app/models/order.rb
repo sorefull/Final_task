@@ -16,7 +16,7 @@ class Order < ApplicationRecord
   has_and_belongs_to_many :products
 
   def add_to_order(product)
-    unless products.exists? product
+    unless products.exists? product.id
       products << product
       true
     else
@@ -25,7 +25,7 @@ class Order < ApplicationRecord
   end
 
   def drop_from_order(product)
-    if products.exists? product
+    if products.exists? product.id
       products.delete product
       true
     else

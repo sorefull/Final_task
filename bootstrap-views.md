@@ -1,0 +1,7 @@
+* [Welcome](https://startbootstrap.com/template-overviews/shop-homepage/)
+* [Products](https://startbootstrap.com/template-overviews/4-col-portfolio/)
+* [Product](https://startbootstrap.com/template-overviews/shop-item/)
+* [Nice Right BAR](https://startbootstrap.com/template-overviews/blog-home/)
+* [Funny page](https://startbootstrap.com/template-overviews/one-page-wonder/)
+* [Image at BKGRND](https://startbootstrap.com/template-overviews/full-width-pics/)
+* [Nice buisness site](https://startbootstrap.com/template-overviews/business-casual/)

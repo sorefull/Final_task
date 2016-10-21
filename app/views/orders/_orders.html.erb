@@ -33,6 +33,7 @@
     <% if order.contact_phone %><b>Contact phone:</b> <%= order.contact_phone %><br><% end %>
     <% if order.additional %><b>Additional:</b> <%= order.additional %><br><% end %>
     <b>Total price:</b> <%= order.total_price %><br>
+    <%= link_to 'Restore', update_order_path(order_id: order.id, meth: :restore), method: :patch %><br>
     <%= link_to 'Delete', order, method: :delete, style: 'color:red;' %><br>
   <% end %>
 </div>
@@ -50,5 +51,6 @@
     <% if order.additional %><b>Additional:</b> <%= order.additional %><br><% end %>
     <b>Total price:</b> <%= order.total_price %><br>
     <%= link_to 'Delete', order, method: :delete, style: 'color:red;' %><br>
+    <%= link_to 'Restore', update_order_path(order_id: order.id, meth: :restore), method: :patch %><br>
   <% end %>
 </div>
