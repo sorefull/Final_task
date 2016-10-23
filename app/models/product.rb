@@ -30,14 +30,18 @@ class Product < ApplicationRecord
     approved_reviews = reviews.where(approved: true)
     reviews_length = approved_reviews.length
     if reviews_length < 1
-      'No raiting yet.'
+      0
     else
       sum = 0
       approved_reviews.each do |review|
         sum += Review.stars[review.stars]
       end
-      Review.stars.keys[sum/reviews_length]
+      sum/reviews_length
     end
+  end
+
+  def a_reviews
+    reviews.where(approved: true).count
   end
 
   # Orders

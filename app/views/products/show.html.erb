@@ -1,32 +1,84 @@
-<h2><%= @product.title %></h2>
-<%= image_tag @product.image.normal.url %><br>
-<%= link_to @product.category.title, @product.category %>
-<p>
-  <%= @product.description %>
-</p>
-<h3>Price = <%= @product.price %>$</h3>
-<% if can? :update, Product %><%= link_to 'Edit product', edit_product_path(@product) %><br><% end %>
-<% if can? :delete, Product %><%= link_to 'Delete product', @product, method: :delete, data: { confirm: "Are you sure?" }, style: 'color:red;' %><br><% end %>
-<% if can? :update, Order %><%= link_to 'Add to Cart', update_order_path(product_id: @product, meth: :add), method: :patch %><br><% end %>
-<b>Raiting:</b> <%= @product.raiting %>
-<div class="reviews">
-  <% @product.reviews.where(approved: true).each do |review| %>
-    <%= review.body %>
-    <b><%= review.stars %></b><br>
-  <% end %>
+<div class="thumbnail">
+  <%= image_tag @product.image.show.url %><br>
+  <div class="caption-full">
+    <h4 class="pull-right">$<%= @product.price %></h4>
+    <h4><%= @product.title %></h4>
+    <p>See more products like these at <%= link_to @product.category.title, @product.category %> category.</p>
+    <p><%= @product.description %></p>
+    <hr>
+    <div class="ratings">
+      <p class="pull-right"><%= @product.reviews.count %> reviews.</p>
+      <p>
+        <% if @product.reviews.where(approved: true).count > 0 %><% @product.raiting.times do %>
+        <span class="glyphicon glyphicon-star"></span>
+        <% end %><% else %>
+        <p>
+          Ro raiting yet
+        </p>
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <% if can? :update, Product %><%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-primary' %><% end %>
+  <% if can? :delete, Product %><%= link_to 'Delete product', @product, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %><% end %>
+  <% if can? :update, Order %><%= link_to 'Add to Cart', update_order_path(product_id: @product, meth: :add), method: :patch, class: 'btn btn-warning' %><% end %>
 </div>
 
-<% if can? :create, Review %>
-  <%= form_for [@product, @product.reviews.build], remote: true do |f| %>
-    <%= f.text_area :body, placeholder: 'Review..' %><br>
-    <%= f.label :stars %><br>
-    <%= f.select(:stars) do %>
-      <option value="" disabled selected>Select your option</option>
-      <% Review.stars.each do |star, val| -%>
-        <%= content_tag(:option, "#{star} (#{val})", value: star) %>
-      <% end %>
+<div class="well">
+  <div class="text-right">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Leave a Review</button>
+  </div>
+  <div class="reviews">
+    <% @product.reviews.where(approved: true).each do |review| %>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <% Review.stars[review.stars].times do %>
+        <span class="glyphicon glyphicon-star"></span>
+        <% end %>
+        <%= review.user.email %>
+        <span class="pull-right"><%= @product.created_at.strftime('%b %d, %Y') %></span>
+        <p>
+          <%= review.body %>
+        </p>
+      </div>
+    </div>
     <% end %>
+  </div>
+</div>
 
-    <%= f.submit :Save  %>
-  <% end %>
-<% end %>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New Review</h4>
+      </div>
+      <div class="modal-body">
+        <% if can? :create, Review %>
+          <%= form_for [@product, @product.reviews.build], remote: true do |f| %>
+          <div class="form-group">
+            <%= f.label :body, class: 'control-label' %>
+            <%= f.text_area :body, placeholder: 'Review..', class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :stars, class: 'control-label' %>
+            <%= f.select :stars , {}, {}, class: 'form-control' do %>
+              <option value="" disabled selected>Select your option</option>
+              <% Review.stars.each do |star, val| -%>
+                <%= content_tag(:option, "#{star} (#{val})", value: star) %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit :Save, class: 'btn btn-primary'  %>
+          <% end %>
+          <% else %>
+          <div class="alert alert-danger">Log in before!!!</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

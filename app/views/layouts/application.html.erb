@@ -7,22 +7,36 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= render 'source/header' %>
     <div class="container", align="center">
       <% if notice %>
-      <!-- <div class="alert alert-success", style = "width:400px">
+      <div class="alert alert-success", style = "width:400px">
         <strong>Success!</strong> <%= notice %>
-      </div> -->
-      <%= notice %>
+      </div>
+      <!-- <%= notice %> -->
       <% end %>
 
       <% if alert %>
-      <!-- <div class="alert alert-danger", style = "width:400px">
+      <div class="alert alert-danger", style = "width:400px">
         <strong>Alert!</strong> <%= alert %>
-      </div> -->
-      <%= alert %>
+      </div>
+      <!-- <%= alert %> -->
       <% end %>
     </div>
-    <%= render 'source/header' %>
-    <%= yield %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <h3>Navigation</h3>
+          <%= render 'source/navigation' %>
+          <% if controller_name == 'products' and action_name == 'index' %>
+          <h3>Search</h3>
+            <%= render 'source/search' %>
+          <% end %>
+        </div>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

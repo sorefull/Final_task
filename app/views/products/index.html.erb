@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
   <%= search_form_for @q do |f| %>
     <%= f.label :title_or_description_cont %><br>
     <%= f.search_field :title_or_description_cont %><br>
@@ -19,7 +19,7 @@
 
     <%= f.submit 'Search' %>
   <% end %>
-</p>
+</p> -->
 <% @products.each do |product| %>
   <%= link_to product.title, product %><br>
 <% end %>

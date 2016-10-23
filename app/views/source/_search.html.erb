@@ -1,0 +1,25 @@
+<%= search_form_for @q do |f| %>
+<div class="form-group">
+  <%= f.search_field :title_or_description_cont, class: 'form-control', placeholder: 'Search product...' %>
+</div>
+<div class="form-group">
+  <%= f.select :category_id_eq, {}, {}, class: 'form-control' do %>
+    <option value="" disabled selected>Select category</option>
+    <% Category.all.each do |c| -%>
+      <%= content_tag(:option, c.title, value: c.id) %>
+    <% end %>
+  <% end %><br>
+</div>
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.search_field :price_gteq, class: 'form-control', placeholder: 'from...' %><br>
+    </div>
+    <div class="col-md-6">
+      <%= f.search_field :price_lteq, class: 'form-control', placeholder: 'to ...' %><br>
+    </div>
+  </div>
+</div>
+<%= f.submit 'Search', class: 'btn btn-primary' %>
+<% end %>
