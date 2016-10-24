@@ -13,4 +13,5 @@ class Category < ApplicationRecord
   has_many :products, dependent: :destroy
   validates :title, presence: true, length: { minimum: 4 }
   validates :description, presence: true, length: { minimum: 20 }
+  mount_uploader :image, ImageUploader
 end

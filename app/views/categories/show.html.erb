@@ -1,10 +1,27 @@
-<h2><%= @category.title %></h2>
-<p>
-  <%= @category.description %>
-</p>
-<% if can? :update, Category %><%= link_to 'Edit category', edit_category_path(@category) %><br><% end %>
-<% if can? :delete, Category %><%= link_to 'Delete category', @category, method: :delete, style: 'color:red;', data: { confirm: "Are you sure? This will delete all products of this category!" } %><% end %>
-<h3>Products:</h3>
-<% @category.products.each do |product| %>
-<%= link_to product.title, product %><br>
-<% end %>
+<header class="jumbotron hero-spacer" style="background-image:url(<%= @category.image.show.url %>);background-size: cover;">
+  <h1><%= @category.title %></h1>
+  <p><%= @category.description %></p>
+  <p>
+    <% if can? :update, Category %><%= link_to 'Edit category', edit_category_path(@category), class: 'btn btn-primary' %><% end %>
+    <% if can? :delete, Category %><%= link_to 'Delete category', @category, method: :delete, data: { confirm: "Are you sure? This will delete all products of this category!" }, class: 'btn btn-danger' %><% end %>
+  </p>
+</header>
+<hr>
+<div class="row">
+  <% @category.products.each do |product| %>
+  <div class="col-sm-12 col-lg-4 col-md-6">
+    <div class="thumbnail">
+      <%= image_tag product.image.welcome.url %>
+      <div class="caption">
+        <h4 class="pull-right">$<%= product.price %></h4>
+        <h4><%= link_to product.title[0..10]+'...', product %>
+        </h4>
+        <p><%= product.description[0..50]+'...' %></p>
+      </div>
+      <div class="ratings">
+        <p><%= product.reviews.where(approved: true).count > 0 ? product.reviews.where(approved: true).count.to_s + ' reviews.' : 'No reviews yet.' %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

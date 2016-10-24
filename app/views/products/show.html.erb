@@ -19,10 +19,12 @@
       </p>
     </div>
   </div>
+</div>
+<p>
+  <% if can? :update, Order %><%= link_to 'Add to Cart', update_order_path(product_id: @product, meth: :add), method: :patch, class: 'btn btn-warning' %><% end %>
   <% if can? :update, Product %><%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-primary' %><% end %>
   <% if can? :delete, Product %><%= link_to 'Delete product', @product, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %><% end %>
-  <% if can? :update, Order %><%= link_to 'Add to Cart', update_order_path(product_id: @product, meth: :add), method: :patch, class: 'btn btn-warning' %><% end %>
-</div>
+</p>
 
 <div class="well">
   <div class="text-right">
@@ -54,8 +56,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">New Review</h4>
       </div>
+      <% if can? :create, Review %>
       <div class="modal-body">
-        <% if can? :create, Review %>
           <%= form_for [@product, @product.reviews.build], remote: true do |f| %>
           <div class="form-group">
             <%= f.label :body, class: 'control-label' %>
@@ -73,7 +75,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit :Save, class: 'btn btn-primary'  %>
+            <%= f.submit :Save, class: 'btn btn-primary'  %>
           <% end %>
           <% else %>
           <div class="alert alert-danger">Log in before!!!</div>

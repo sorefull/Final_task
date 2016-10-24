@@ -8,32 +8,39 @@
   </head>
   <body>
     <%= render 'source/header' %>
-    <div class="container", align="center">
-      <% if notice %>
-      <div class="alert alert-success", style = "width:400px">
-        <strong>Success!</strong> <%= notice %>
-      </div>
-      <!-- <%= notice %> -->
-      <% end %>
-
-      <% if alert %>
-      <div class="alert alert-danger", style = "width:400px">
-        <strong>Alert!</strong> <%= alert %>
-      </div>
-      <!-- <%= alert %> -->
-      <% end %>
-    </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-2">
-          <h3>Navigation</h3>
-          <%= render 'source/navigation' %>
-          <% if controller_name == 'products' and action_name == 'index' %>
-          <h3>Search</h3>
-            <%= render 'source/search' %>
-          <% end %>
+          <div class="col-md-4 col-sm-5 col-lg-3">
+            <div class="well">
+            <h3>Navigation</h3>
+            <%= render 'source/navigation' %>
+            <% if controller_name == 'products' and action_name == 'index' %>
+            <h3>Search</h3>
+              <%= render 'source/search' %>
+            <% end %>
+            <% if controller_name == 'categories' and action_name == 'index' %>
+            <h3>Categories</h3>
+              <%= render 'source/categories' %>
+            <% end %>
+          </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8 col-sm-7 col-lg-9">
+          <div class="row text-center">
+            <div class="col-12">
+              <% if notice %>
+              <div class="alert alert-success">
+                <strong>Success!</strong> <%= notice %>
+              </div>
+              <% end %>
+
+              <% if alert %>
+              <div class="alert alert-danger">
+                <strong>Alert!</strong> <%= alert %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
           <%= yield %>
         </div>
       </div>

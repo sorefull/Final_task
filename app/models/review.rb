@@ -14,7 +14,7 @@
 
 class Review < ApplicationRecord
   # Validation
-  validates :body, presence: true, length: { maximum: 140 }
+  # validates :body, presence: true, length: { maximum: 140 }
   validates :stars, presence: true#, numericality: { greater_than: 0, less_than: 6 }
 
   # Devise

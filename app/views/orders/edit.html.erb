@@ -1,18 +1,40 @@
-<% @order.products.each do |product| %>
-  <%= link_to product.title, product %>
-  <%= product.price %>
-  <%= link_to 'Remove', update_order_path(product_id: product, meth: :drop), method: :patch, style: 'color:red;' %><br>
-<% end %>
-Price: <%= @order.total_price %>$<br>
-<%= link_to 'Buy now', '', class: 'buy', remote: true %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.products.each do |product| %>
+    <tr>
+      <td><%= link_to product.title, product %></td>
+      <td><%= link_to product.category.title, product.category %></td>
+      <td>$ <%= product.price %></td>
+      <td><%= link_to 'Remove', update_order_path(product_id: product, meth: :drop), method: :patch, style: 'color:red;' %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td><td></td><td>Total Price: $ <%= @order.total_price %></td><td><%= link_to 'Buy now!', '', class: 'buy', remote: true %></td>
+    </tr>
+  </tbody>
+</table>
+
 <div class="form", style="display: none;">
   <%= form_for(@order, url: update_order_path(meth: :buy), html: {method: "patch"}) do |f| %>
-    <%= f.label :contact_phone %><br>
-    <%= f.text_field :contact_phone, placeholder: 'Your contact Phone' %><br>
 
-    <%= f.label :additional %><br>
-    <%= f.text_area :additional, placeholder: 'Additional information.' %><br>
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon1">Phone</span>
+    <%= f.text_field :contact_phone, class: 'form-control', placeholder: 'Your contact Phone' %><br>
+  </div><br>
 
-    <%= f.submit :buy! %>
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon1">Additional</span>
+    <%= f.text_area :additional, class: 'form-control', placeholder: 'Additional information' %><br>
+  </div><br>
+
+    <%= f.submit :buy!, class: 'btn btn-primary' %>
   <% end %>
 </div>

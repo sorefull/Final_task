@@ -4,14 +4,14 @@
 
 $(document).on('turbolinks:load', function() {
   $('.show_approved').click(function(){
-    $('.show_approved').css('color', 'blue');
-    $('.show_unapproved').css('color', 'gray');
+    $('#show_approved').addClass('active');
+    $('#show_unapproved').removeClass('active');
     $('div.approved').show();
     $('div.unapproved').hide();
   });
   $('.show_unapproved').click(function(){
-    $('.show_unapproved').css('color', 'blue');
-    $('.show_approved').css('color', 'gray');
+    $('#show_unapproved').addClass('active');
+    $('#show_approved').removeClass('active');
     $('div.approved').hide();
     $('div.unapproved').show();
   });

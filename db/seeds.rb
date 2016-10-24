@@ -12,7 +12,7 @@ User.create(email: 'adminuser@example.com',
             role: 1)
 # Categiries
 10.times do
-  Category.create(title: Faker::Company.buzzword, description: Faker::Lorem.paragraph)
+  Category.create(title: Faker::Company.buzzword, description: Faker::Lorem.paragraph, remote_image_url: Faker::Avatar.image)
 end
 
 # Products

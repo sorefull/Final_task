@@ -11,6 +11,10 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def show
+    render partial: 'order', locals: { order: @order }
+  end
+
   def update
     case params[:meth]
     when 'add'
@@ -36,7 +40,7 @@ class OrdersController < ApplicationController
         message = 'First add some products to your cart!'
       end
     end
-    
+
     case params[:meth]
     when 'cancel', 'send', 'restore'
       redirect_to orders_path, notice: message
@@ -58,6 +62,7 @@ class OrdersController < ApplicationController
   private
   def set_resources
     @order = Order.find(params[:order_id]) if params[:order_id]
+    @order = Order.find(params[:id]) if params[:id]
     @product = params[:product_id] ? Product.find(params[:product_id]) : nil
     @order ||= current_user.order
   end

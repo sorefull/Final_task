@@ -1,6 +1,7 @@
-<h2>Reviews</h2>
-<%= link_to 'Unapproved', '', class: 'show_unapproved', remote: true, style: 'color:blue;' %>
-<%= link_to 'Approved', '', class: 'show_approved', remote: true, style: 'color:gray;' %>
+<ul class="nav nav-tabs">
+  <li id='show_unapproved' role="presentation" class="active"><%= link_to 'Unapproved', '', class: 'show_unapproved', remote: true %></li>
+  <li id='show_approved' role="presentation"><%= link_to 'Approved', '', class: 'show_approved', remote: true %></li>
+</ul>
 <div class="reviews">
   <%= render partial: 'reviews', locals: { reviews: @reviews } %>
 </div>

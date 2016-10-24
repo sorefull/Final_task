@@ -1,26 +1,23 @@
-<!-- <p>
-  <%= search_form_for @q do |f| %>
-    <%= f.label :title_or_description_cont %><br>
-    <%= f.search_field :title_or_description_cont %><br>
-
-    <%= f.label :category_id_eq %><br>
-    <%= f.select(:category_id_eq) do %>
-      <option value="" disabled selected>Select category</option>
-      <% Category.all.each do |c| -%>
-        <%= content_tag(:option, c.title, value: c.id) %>
-      <% end %>
-    <% end %><br>
-
-    <%= f.label :price_gteq %><br>
-    <%= f.search_field :price_gteq %><br>
-
-    <%= f.label :price_lteq %><br>
-    <%= f.search_field :price_lteq %><br>
-
-    <%= f.submit 'Search' %>
+<div class="row">
+  <% @products.each do |product| %>
+  <div class="col-sm-12 col-lg-4 col-md-6">
+    <div class="thumbnail">
+      <%= image_tag product.image.welcome.url %>
+      <div class="caption">
+        <h4 class="pull-right">$<%= product.price %></h4>
+        <h4><%= link_to product.title[0..10]+'...', product %>
+        </h4>
+        <p><%= product.description[0..50]+'...' %></p>
+      </div>
+      <div class="ratings">
+        <p><%= product.reviews.where(approved: true).count > 0 ? product.reviews.where(approved: true).count.to_s + ' reviews.' : 'No reviews yet.' %></p>
+      </div>
+    </div>
+  </div>
   <% end %>
-</p> -->
-<% @products.each do |product| %>
-  <%= link_to product.title, product %><br>
-<% end %>
-<%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+</div>
+<div class="row text-center">
+  <div class="col-md-12">
+    <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

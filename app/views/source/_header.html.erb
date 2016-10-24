@@ -16,11 +16,11 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <% if can? :menage, Category %><li><%= link_to 'New category', new_category_path %></li><% end %>
               <% if can? :menage, Product %><li><%= link_to 'New product', new_product_path %></li><% end %>
+              <% if can? :menage, Category %><li><%= link_to 'New category', new_category_path %></li><% end %>
               <li role="separator" class="divider"></li>
-              <% if can? :menage, Review %><li><%= link_to 'Reviews', reviews_products_path %></li><% end %>
-              <% if can? :read, Order %><li><%= link_to 'Orders', orders_path %></li><% end %>
+              <% if can? :menage, Review %><li><%= link_to "Reviews (#{Review.where(approved: false).count})", reviews_products_path %></li><% end %>
+              <% if can? :read, Order %><li><%= link_to "Orders (#{Order.where(status: :completed).count})", orders_path %></li><% end %>
             </ul>
           </li>
         </ul>
@@ -36,9 +36,9 @@
               <li><%= link_to 'Sign in', new_user_session_path %></li>
               <li><%= link_to 'Sign up', new_user_registration_path %></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">LinkedIn</a></li>
+              <li><%= link_to 'Facebook', user_facebook_omniauth_authorize_path %></li>
+              <li><%= link_to 'GitHub', user_github_omniauth_authorize_path %></li>
+              <li><%= link_to 'LinkedIn', user_linkedin_omniauth_authorize_path %></li>
             </ul>
           </li>
         <% end %>

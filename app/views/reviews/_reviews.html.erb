@@ -1,22 +1,51 @@
 <div class="approved" style="display: none;">
-  <% reviews.where(approved: true).each do |review| %>
-    <%= review.user.email %>
-    <%= review.body %>
-    <%= review.stars %>
-    <%= link_to review.product.title, review.product %>
-    <%= link_to 'Unapprove!', [review.product, review, meth: :unapprove], method: :patch %>
-    <%= link_to 'Delete', [review.product, review], method: :delete, style: 'color:red;', remote: true, class: :delete_review %>
-    <br>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Body</th>
+        <th>Rating</th>
+        <th>Product</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reviews.where(approved: true).each do |review| %>
+      <tr>
+        <td><%= review.user.email %></td>
+        <td><%= review.body %></td>
+        <td><%= review.stars %></td>
+        <td><%= link_to review.product.title, review.product %></td>
+        <td><%= link_to 'Unapprove!', [review.product, review, meth: :unapprove], method: :patch %> |
+        <%= link_to 'Delete', [review.product, review], method: :delete, style: 'color:red;', remote: true, class: :delete_review %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <div class="unapproved">
-  <% reviews.where(approved: false).each do |review| %>
-    <%= review.user.email %>
-    <%= review.body %>
-    <%= review.stars %>
-    <%= link_to review.product.title, review.product %>
-    <%= link_to 'Approve!', [review.product, review, meth: :approve], method: :patch %>
-    <%= link_to 'Delete', [review.product, review], method: :delete, style: 'color:red;', remote: true, class: :delete_review %>
-    <br>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Body</th>
+        <th>Rating</th>
+        <th>Product</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reviews.where(approved: false).each do |review| %>
+      <tr>
+        <td><%= review.user.email %></td>
+        <td><%= review.body %></td>
+        <td><%= review.stars %></td>
+        <td><%= link_to review.product.title, review.product %></td>
+        <td><%= link_to 'Approve!', [review.product, review, meth: :approve], method: :patch %> |
+        <%= link_to 'Delete', [review.product, review], method: :delete, style: 'color:red;', remote: true, class: :delete_review %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>

@@ -7,27 +7,32 @@ $(document).on('turbolinks:load', function() {
     $('.form').show();
   });
   $('.show_sended').click(function(){
+    $('#show_sended').addClass('active');
+    $('#show_completed').removeClass('active');
+    $('#show_canceled').removeClass('active');
     $('.sended').show();
-    $('.show_sended').css('color', 'blue')
     $('.completed').hide();
-    $('.show_completed').css('color', 'gray')
     $('.canceled').hide();
-    $('.show_canceled').css('color', 'gray')
   });
   $('.show_completed').click(function(){
+    $('#show_sended').removeClass('active');
+    $('#show_completed').addClass('active');
+    $('#show_canceled').removeClass('active');
     $('.completed').show();
-    $('.show_completed').css('color', 'blue')
     $('.sended').hide();
-    $('.show_sended').css('color', 'gray')
     $('.canceled').hide();
-    $('.show_canceled').css('color', 'gray')
   });
   $('.show_canceled').click(function(){
+    $('#show_sended').removeClass('active');
+    $('#show_completed').removeClass('active');
+    $('#show_canceled').addClass('active');
     $('.canceled').show();
-    $('.show_canceled').css('color', 'blue')
     $('.sended').hide();
-    $('.show_sended').css('color', 'gray')
     $('.completed').hide();
-    $('.show_completed').css('color', 'gray')
+  });
+  $(document).on('ajax:success', '.open_order', function(xhr, data, status) {
+    $('.info_box').html(data);
+    $('.bg-info').removeClass('bg-info');
+    $(this).parent().parent().addClass('bg-info');
   });
 });
