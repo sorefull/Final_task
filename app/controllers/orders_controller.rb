@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
     @co_orders = Order.where(status: :completed)
     @ca_orders = Order.where(status: :canceled)
     @se_orders = Order.where(status: :sended)
+    UserNotifierMailer.send_order_email(Order.first.user, Order.first)
   end
 
   def edit
