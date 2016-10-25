@@ -16,6 +16,16 @@ class UserNotifierMailer < ActionMailer::Base
     #
     # mail.deliver
 
+    Mail.defaults do
+      delivery_method :smtp, { :address   => "smtp.sendgrid.net",
+                               :port      => 587,
+                               :domain    => "floating-beyond-23845.herokuapp.com",
+                               :user_name => ENV['SENDGRID_USERNAME'],
+                               :password  => ENV['SENDGRID_PASSWORD'],
+                               :authentication => 'plain',
+                               :enable_starttls_auto => true }
+    end
+
     mail = Mail.deliver do
       to 'yourRecipient@domain.com'
       from 'Your Name <name@domain.com>'
