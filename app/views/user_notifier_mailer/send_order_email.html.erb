@@ -9,7 +9,7 @@
       There is list of your order!
     </p>
     <ul>
-      <%= @order.products.each do |product| %>
+      <% @order.products.each do |product| %>
         <li><%= product.title %> $ <%= product.price %></li>
       <% end %>
       <li>Total price: $ <%= @order.total_price %></li>
