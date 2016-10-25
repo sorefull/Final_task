@@ -3,7 +3,6 @@ class UserNotifierMailer < ActionMailer::Base
   def send_order_email(user, order)
     @user = user
     @order = order
-    binding.pry
     Mail.defaults do
       delivery_method :smtp, { :address   => "smtp.sendgrid.net",
                                :port      => 587,
