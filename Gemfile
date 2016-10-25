@@ -43,6 +43,7 @@ gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'will_paginate-bootstrap'
 gem 'whenever', :require => false
+gem 'sendgrid'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
