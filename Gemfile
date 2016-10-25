@@ -43,7 +43,7 @@ gem 'figaro'
 gem 'cancancan', '~> 1.10'
 gem 'will_paginate-bootstrap'
 gem 'whenever', :require => false
-gem 'sendgrid'
+gem 'sendgrid-ruby'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -56,6 +56,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_girl'
+  gem 'mailcatcher'
 end
 
 group :development do
