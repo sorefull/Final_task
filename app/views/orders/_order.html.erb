@@ -1,14 +1,30 @@
 <h3>Info</h3>
-<div class="container">
-  <b>Email:</b> <%= order.user.email %><br>
-  <b>Status:</b> <%= order.status %><br>
-  <b>Products count:</b> <%= order.products.count %><br>
+  <p>
+    <b>Email:</b> <%= order.user.email %>
+  </p>
+  <p>
+    <b>Status:</b> <%= order.status %>
+  </p>
+  <p>
+    <b>Products count:</b> <%= order.products.count %>
+  </p>
   <ul>
     <% order.products.each do |product| %>
       <li><%= link_to product.title, product %></li>
     <% end %>
   </ul>
-  <% if order.contact_phone != '' %><b>Contact phone:</b> <%= order.contact_phone %><br><% end %>
-  <% if order.additional != '' %><b>Additional:</b> <%= order.additional %><br><% end %>
-  <b>Total price:</b> $<%= order.total_price %><br>
-</div>
+
+  <% if order.contact_phone != '' %>
+  <p>
+    <b>Contact phone:</b> <%= order.contact_phone %>
+  </p>
+  <% end %>
+
+  <% if order.additional != '' %>
+  <p>
+    <b>Additional:</b> <%= order.additional %>
+  </p>
+  <% end %>
+  <p>
+    <b>Total price:</b> $<%= order.total_price %>
+  </p>
