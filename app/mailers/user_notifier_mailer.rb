@@ -13,6 +13,7 @@ class UserNotifierMailer < ActionMailer::Base
                                :enable_starttls_auto => true }
     end
     email = @user.email
+    body = render 'user_notifier_mailer/send_order_email'
     mail = Mail.deliver do
       to email
       from 'sales@spalahshop.com'

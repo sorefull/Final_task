@@ -1,4 +1,4 @@
-    <h1>Hello, <%= @user.name %>!</h1>
+    <h1>Hello, <%= @order.user.email %>!</h1>
     <p>Thanks for buying shome products in our shop!</p>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -10,7 +10,7 @@
     </p>
     <ul>
       <%= @order.products.each do |product| %>
-        <li><%= link_to product.title, product %> $ <%= product.price %></li>
+        <li><%= product.title %> $ <%= product.price %></li>
       <% end %>
       <li>Total price: $ <%= @order.total_price %></li>
     </ul>
