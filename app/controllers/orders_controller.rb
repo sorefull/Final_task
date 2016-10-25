@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
       if @order.buy_products!
         UserNotifierMailer.send_order_email(@order.user, @order).deliver!
         message = 'We will contact you in nearest time, have a nice day!'
+        binding.pry
       else
         message = 'First add some products to your cart!'
       end

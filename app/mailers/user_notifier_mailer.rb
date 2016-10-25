@@ -3,6 +3,7 @@ class UserNotifierMailer < ActionMailer::Base
   def send_order_email(user, order)
     @user = user
     @order = order
+    binding.pry
     Mail.defaults do
       delivery_method :smtp, { :address   => "smtp.sendgrid.net",
                                :port      => 587,
@@ -12,8 +13,9 @@ class UserNotifierMailer < ActionMailer::Base
                                :authentication => 'plain',
                                :enable_starttls_auto => true }
     end
+    email = @user.email
     mail = Mail.deliver do
-      to @user.email
+      to email
       from 'sales@spalahshop.com'
       subject 'Thanks for buying in our Spalah shop'
       text_part do
