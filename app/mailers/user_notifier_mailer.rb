@@ -38,6 +38,7 @@ class UserNotifierMailer < ActionMailer::Base
         body '<b>Hello world in HTML</b>'
       end
     end
+    binding.pry
   end
 
 end
