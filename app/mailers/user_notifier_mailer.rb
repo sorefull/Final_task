@@ -1,21 +1,6 @@
 require 'sendgrid-ruby'
 class UserNotifierMailer < ActionMailer::Base
   def send_order_email(user, order)
-    # binding.pry
-    # @user = user
-    # @order = order
-    #
-    # mail = Mail.new do
-    #   from     'me@test.lindsaar.net'
-    #   to       @user.mail
-    #   subject  'Here is your order'
-    # end
-    #
-    # # mail.delivery_method :sendmail
-    # binding.pry
-    #
-    # mail.deliver
-
     Mail.defaults do
       delivery_method :smtp, { :address   => "smtp.sendgrid.net",
                                :port      => 587,
@@ -25,11 +10,10 @@ class UserNotifierMailer < ActionMailer::Base
                                :authentication => 'plain',
                                :enable_starttls_auto => true }
     end
-
     mail = Mail.deliver do
-      to 'yourRecipient@domain.com'
-      from 'Your Name <name@domain.com>'
-      subject 'This is the subject of your email'
+      to @user.email
+      from 'sales@spalahshop.com'
+      subject 'Thanks for buying in our Spalah shop'
       text_part do
         body 'Hello world in text'
       end
@@ -38,7 +22,6 @@ class UserNotifierMailer < ActionMailer::Base
         body '<b>Hello world in HTML</b>'
       end
     end
-    # binding.pry
   end
 
 end
