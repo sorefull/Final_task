@@ -18,7 +18,4 @@ $(document).on('turbolinks:load', function() {
   $(document).on('ajax:success', '.delete_review', function(xhr, data, status) {
     $('.reviews').html(data);
   });
-  $(document).on('ajax:success', '#new_review', function(xhr, data, status) {
-  $('#new_review').removeAttr('selected');
-});
 });
