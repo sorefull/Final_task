@@ -15,7 +15,9 @@ User.create(email: 'adminuser@example.com',
   Category.create(title: Faker::Company.buzzword, description: Faker::Lorem.paragraph, remote_image_url: Faker::Avatar.image)
 end
 
+f = Category.first.id
+t = Category.last.id
 # Products
 50.times do
-  Product.create(title: Faker::Commerce.product_name, description: Faker::Lorem.paragraph, price: Faker::Commerce.price, remote_image_url: Faker::Avatar.image, category_id: rand(1..10))
+  Product.create(title: Faker::Commerce.product_name, description: Faker::Lorem.paragraph, price: Faker::Commerce.price, remote_image_url: Faker::Avatar.image, category_id: rand(f..t))
 end
