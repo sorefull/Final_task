@@ -43,6 +43,7 @@ gem 'will_paginate-bootstrap'
 gem 'whenever', :require => false
 gem 'sendgrid-ruby'
 gem 'mail'
+gem 'faker'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -58,7 +59,6 @@ group :development, :test do
   gem 'mailcatcher'
   gem "rails-erd"
   gem 'figaro'
-  gem 'faker'
   gem 'awesome_print'
   gem 'annotate'
 end
